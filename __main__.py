@@ -45,12 +45,12 @@ def main():
     y = int(MAX_Y / 2)
     position = Point(x, y)
 
-    robot = Actor()
-    robot.set_text("#")
-    robot.set_font_size(FONT_SIZE)
-    robot.set_color(WHITE)
-    robot.set_position(position)
-    cast.add_actor("robots", robot)
+    gold_digger = Actor()
+    gold_digger.set_text("#")
+    gold_digger.set_font_size(FONT_SIZE)
+    gold_digger.set_color(WHITE)
+    gold_digger.set_position(position)
+    cast.add_actor("gold_digger", gold_digger)
     
     # create the artifacts
     with open(DATA_PATH) as file:
