@@ -4,6 +4,7 @@ import random
 from game.casting.actor import Actor
 from game.casting.mineral import Mineral
 from game.casting.cast import Cast
+from game.casting.score import Score
 
 from game.directing.director import Director
 
@@ -21,8 +22,7 @@ CELL_SIZE = 15
 FONT_SIZE = 15
 COLS = 60
 ROWS = 40
-CAPTION = "Robot Finds Kitten"
-DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
+CAPTION = "Greed"
 WHITE = Color(255, 255, 255)
 DEFAULT_MINERALS = 0
 
@@ -32,15 +32,13 @@ def main():
     # create the cast
     cast = Cast()
     
-    # create the banner
-    banner = Actor()
-    banner.set_text("")
-    banner.set_font_size(FONT_SIZE)
-    banner.set_color(WHITE)
-    banner.set_position(Point(CELL_SIZE, 0))
-    cast.add_actor("banners", banner)
+    # create the score
+    score = Score()
+    position = Point(0, 0)
+    score.set_position(position)
+    cast.add_actor("score", score)
     
-    # create the robot
+    # create the gold_digger
     x = int(MAX_X / 2)
     y = int(MAX_Y / 2)
     position = Point(x, y)
@@ -51,34 +49,7 @@ def main():
     gold_digger.set_color(WHITE)
     gold_digger.set_position(position)
     cast.add_actor("gold_digger", gold_digger)
-    
-    # create the artifacts
-    with open(DATA_PATH) as file:
-        data = file.read()
-        messages = data.splitlines()
 
-    for n in range(DEFAULT_MINERALS):
-        text = chr(random.randint(33, 126))
-        message = messages[n]
-
-        x = random.randint(1, COLS - 1)
-        y = random.randint(1, ROWS - 1)
-        position = Point(x, y)
-        position = position.scale(CELL_SIZE)
-
-        r = random.randint(0, 255)
-        g = random.randint(0, 255)
-        b = random.randint(0, 255)
-        color = Color(r, g, b)
-        
-        mineral = Mineral()
-        mineral.set_text(text)
-        mineral.set_font_size(FONT_SIZE)
-        mineral.set_color(color)
-        mineral.set_position(position)
-        mineral.set_message(message)
-        cast.add_actor("minerals", mineral)
-    
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)

@@ -5,6 +5,7 @@ class Score(Actor):
     def __init__(self):
         super().__init__()
         self._score = 0
+        self.set_text(f'Score: {self._score}')
 
     # Keeps track of score.
     def add_points(self, points):
