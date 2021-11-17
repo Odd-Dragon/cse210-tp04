@@ -23,6 +23,7 @@ class Actor:
         self._color = Color(255, 255, 255)
         self._position = Point(0, 0)
         self._velocity = Point(0, 0)
+        self._image = ""
 
     def get_color(self):
         """Gets the actor's color as a tuple of three ints (r, g, b).
@@ -55,6 +56,11 @@ class Actor:
             string: The actor's textual representation.
         """
         return self._text
+        
+    def get_image(self):
+        """Gets the actor's image representation.
+        """
+        return self._image
 
     def get_velocity(self):
         """Gets the actor's speed and direction.
