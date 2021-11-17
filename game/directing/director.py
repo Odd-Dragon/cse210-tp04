@@ -17,7 +17,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
-        self._points = 0
+
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -48,20 +48,20 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        banner = cast.get_first_actor("banners")
+        score = cast.get_first_actor("score")
         gold_digger = cast.get_first_actor("gold_digger")
-        artifacts = cast.get_actors("artifacts")
+        minerals = cast.get_actors("minerals")
 
-        banner.set_text("")
+        
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         gold_digger.move_next(max_x, max_y)
         
-        for artifact in artifacts:
-            if gold_digger.get_position().equals(artifact.get_position()):
-                message = artifact.get_message()
-                banner.set_text(message)    
-        
+        for mineral in minerals:
+            if gold_digger.get_position().equals(mineral.get_position()):
+                points = mineral.get_points()
+                score.add_points(points)
+                
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
         
@@ -72,9 +72,3 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
-    
-    def _set_points(self):
-        pass
-
-    def get_points(self):
-        pass
