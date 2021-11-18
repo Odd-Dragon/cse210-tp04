@@ -5,27 +5,38 @@ class Mineral(Actor):
     """
     An item of cultural or historical interest. 
     
-    The responsibility of an Mineral is to provide a message about itself.
+    The responsibility of an Mineral is to be caught and give (or take) wealth.
 
     Attributes:
         _message (string): A short description about the mineral.
     """
     def __init__(self):
         super().__init__()
-        self._message = ""
+        self._points = 1
         
-    def get_message(self):
-        """Gets the mineral's message.
+    def get_points(self):
+        """Gets the mineral's point value.
         
         Returns:
-            string: The message.
+            int: the points
         """
-        return self._message
+        return self._points
     
-    def set_message(self, message):
-        """Updates the message to the given one.
+    def set_points(self):
+        """ Assign points based on image.
         
         Args:
-            message (string): The given message.
+            points (int): The appropriate number of points.
         """
-        self._message = message
+        if self.get_image == "gem.jpg":
+            self._points = 1
+        elif self.get_image == "gem2.jpg":
+            self._points = 10
+        elif self.get_image == "gem3.jpg":
+            self._points = 3
+        elif self.get_image == "rock1.jpg":
+            self._points = -1
+        elif self.get_image == "rock2.jpg":
+            self._points = -3
+        elif self.get_image == "rock3.jpg":
+            self._points = -10
