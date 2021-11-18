@@ -3,12 +3,8 @@ from game.casting.actor import Actor
 
 class Mineral(Actor):
     """
-    An item of cultural or historical interest. 
     
     The responsibility of an Mineral is to be caught and give (or take) wealth.
-
-    Attributes:
-        _message (string): A short description about the mineral.
     """
     def __init__(self):
         super().__init__()
