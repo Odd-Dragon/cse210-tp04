@@ -24,7 +24,7 @@ class Mineral(Actor):
         Args:
             points (int): The appropriate number of points.
         """
-        if self.get_image == "gem.jpg":
+        if self.get_image == "gem1.jpg":
             self._points = 1
         elif self.get_image == "gem2.jpg":
             self._points = 10
