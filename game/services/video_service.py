@@ -51,7 +51,7 @@ class VideoService:
         x = actor.get_position().get_x()
         y = actor.get_position().get_y()
         #my_image = actor.get_image()
-        my_image = pyray.load_image("data\\images\\gem")
+        my_image = pyray.load_image("data/images/gem")
         my_texture = pyray.load_texture_from_image(my_image)
         pyray.draw_texture(my_texture,x,y)
         pass
