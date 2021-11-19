@@ -9,6 +9,7 @@ from game.casting.score import Score
 from game.directing.director import Director
 
 from game.services.keyboard_service import KeyboardService
+from game.services.physics_service import PhysicsService
 from game.services.video_service import VideoService
 
 from game.shared.color import Color
@@ -46,13 +47,15 @@ def main():
     
     # create the gold_digger
     x = int(MAX_X / 2)
-    y = int(MAX_Y/2)
+    y = 540
     position = Point(x, y)
 
     gold_digger = Actor()
     gold_digger.set_color(WHITE)
     gold_digger.set_position(position)
     gold_digger.set_image("data/images/minecart.png")
+    gold_digger.set_width(48)
+    gold_digger.set_height(48)
     cast.add_actor("gold_digger", gold_digger)
 
 
@@ -93,7 +96,8 @@ def main():
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
-    director = Director(keyboard_service, video_service)
+    physics_service = PhysicsService()
+    director = Director(keyboard_service, video_service, physics_service)
     director.start_game(cast)
 
 

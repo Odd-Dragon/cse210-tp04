@@ -18,21 +18,23 @@ class Mineral(Actor):
         """
         return self._points
     
-    def set_points(self):
+    def set_points(self, mineral_type, mineral_number):
         """ Assign points based on image.
         
         Args:
             points (int): The appropriate number of points.
         """
-        if self.get_image == "gem1.jpg":
-            self._points = 1
-        elif self.get_image == "gem2.jpg":
-            self._points = 10
-        elif self.get_image == "gem3.jpg":
-            self._points = 3
-        elif self.get_image == "rock1.jpg":
-            self._points = -1
-        elif self.get_image == "rock2.jpg":
-            self._points = -3
-        elif self.get_image == "rock3.jpg":
-            self._points = -10
+        if mineral_type == 1:
+            if mineral_number == 1:
+                self._points = 1
+            elif mineral_number == 2:
+                self._points = 10
+            elif mineral_number == 3:
+                self._points = 3
+        elif mineral_type == 2:
+            if mineral_number == 1:
+                self._points = -1
+            elif mineral_number == 2:
+                self._points = -3
+            elif mineral_number == 3:
+                self._points = -10

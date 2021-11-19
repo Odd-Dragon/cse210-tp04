@@ -24,6 +24,8 @@ class Actor:
         self._position = Point(0, 0)
         self._velocity = Point(0, 0)
         self._image = ""
+        self._width = 0
+        self._height = 0
 
     def get_color(self):
         """Gets the actor's color as a tuple of three ints (r, g, b).
@@ -70,7 +72,7 @@ class Actor:
         """
         return self._velocity
     
-    def move_next(self, max_x, max_y):
+    def move_next(self):
         """Moves the actor to its next position according to its velocity. Will wrap the position 
         from one side of the screen to the other when it reaches the given maximum x and y values.
         
@@ -78,8 +80,8 @@ class Actor:
             max_x (int): The maximum x value.
             max_y (int): The maximum y value.
         """
-        x = (self._position.get_x() + self._velocity.get_x()) % max_x
-        y = (self._position.get_y() + self._velocity.get_y()) % max_y
+        x = (self._position.get_x() + self._velocity.get_x()) #% max_x
+        y = (self._position.get_y() + self._velocity.get_y()) #% max_y
         self._position = Point(x, y)
 
     def set_image(self, image):
@@ -93,6 +95,21 @@ class Actor:
             color (Color): The given color.
         """
         self._color = color
+    
+    def set_width(self, width):
+
+        self._width = width
+
+    def get_width(self):
+        return self._width
+
+    def set_height(self, height):
+
+        self._height = height
+
+    def get_height(self):
+        return self._height
+
 
     def set_position(self, position):
         """Updates the position to the given one.

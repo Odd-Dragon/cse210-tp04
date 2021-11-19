@@ -53,6 +53,7 @@ class VideoService:
         color = actor.get_color().to_tuple()
         #my_image = actor.get_image()
         my_image = pyray.load_image(actor.get_image())
+        pyray.image_resize(my_image, actor.get_width(), actor.get_height())
         my_texture = pyray.load_texture_from_image(my_image)
         pyray.draw_texture(my_texture,x,y, color)
 
