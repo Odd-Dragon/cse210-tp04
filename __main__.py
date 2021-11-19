@@ -41,23 +41,29 @@ def main():
     score = Score()
     position = Point(0, 0)
     score.set_position(position)
+    score.set_color(WHITE)
     cast.add_actor("score", score)
     
     # create the gold_digger
-    # create the player
     x = int(MAX_X / 2)
-    y = int(MAX_Y-1)
+    y = int(MAX_Y/2)
     position = Point(x, y)
 
     gold_digger = Actor()
-    gold_digger.set_text("#")
-    gold_digger.set_font_size(FONT_SIZE)
     gold_digger.set_color(WHITE)
     gold_digger.set_position(position)
+    gold_digger.set_image("data/images/minecart.png")
     cast.add_actor("gold_digger", gold_digger)
 
-    
+
+
     # create the artifacts
+    x = int(MAX_X / 2)
+    y = int(0)
+    position = Point(x, y)
+
+
+
     #with open(DATA_PATH) as file:
     #   data = file.read()
     #  messages = data.splitlines()

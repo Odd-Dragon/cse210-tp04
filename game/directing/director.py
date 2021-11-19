@@ -1,3 +1,10 @@
+from game.casting.mineral import Mineral
+from game.shared.point import Point
+from game.shared.color import Color
+import time
+from random import randint as rd
+SPAWN_INTERVAL = 2
+
 class Director:
     """A person who directs the game. 
     
@@ -17,6 +24,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._last_spawn = time.time()
 
         
     def start_game(self, cast):
@@ -50,17 +58,40 @@ class Director:
         """
         score = cast.get_first_actor("score")
         gold_digger = cast.get_first_actor("gold_digger")
-        minerals = cast.get_actors("minerals")
+        
 
         
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         gold_digger.move_next(max_x, max_y)
         
+        if time.time() - self._last_spawn >= SPAWN_INTERVAL:
+            x = rd(int(max_x / 8), int(max_x - max_x / 8))
+            y = 0
+            gem_type = rd(1, 3)
+            position = Point(x,y)
+            mineral = Mineral()
+            mineral.set_position(position)
+            mineral.set_image(f"data/images/gem{gem_type}.png")
+            mineral.set_velocity(Point(0,3))
+            cast.add_actor("minerals", mineral)
+            self._last_spawn = time.time()
+
+        for actor in cast.get_all_actors():
+            actor.move_next(max_x, max_y)
+
+
+
+
+        minerals = cast.get_actors("minerals")
         for mineral in minerals:
             if gold_digger.get_position().equals(mineral.get_position()):
                 points = mineral.get_points()
                 score.add_points(points)
+                cast.remove_actor("minerals", mineral)
+        
+
+        
                 
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
@@ -71,4 +102,5 @@ class Director:
         self._video_service.clear_buffer()
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
+        self._video_service.draw_actors_image(actors)
         self._video_service.flush_buffer()
